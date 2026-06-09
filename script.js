@@ -70,11 +70,51 @@ function speakTranslation() {
     const text =
         document.getElementById("outputText").value;
 
-    if (!text.trim()) return;
+    if (!text.trim()) {
+        alert("No translated text found!");
+        return;
+    }
 
     const speech =
         new SpeechSynthesisUtterance(text);
 
+    const target =
+        document.getElementById("targetLang").value;
+
+    const languages = {
+        en: "en-US",
+        hi: "hi-IN",
+        bn: "bn-BD",
+        fr: "fr-FR",
+        de: "de-DE",
+        es: "es-ES",
+        it: "it-IT",
+        pt: "pt-PT",
+        ru: "ru-RU",
+        ja: "ja-JP",
+        ko: "ko-KR",
+        zh: "zh-CN",
+        ar: "ar-SA",
+        ur: "ur-PK",
+        ta: "ta-IN",
+        te: "te-IN",
+        ml: "ml-IN",
+        kn: "kn-IN",
+        mr: "mr-IN",
+        gu: "gu-IN",
+        pa: "pa-IN",
+        or: "or-IN",
+        ne: "ne-NP"
+    };
+
+    speech.lang =
+        languages[target] || "en-US";
+
+    speech.rate = 1;
+    speech.pitch = 1;
+    speech.volume = 1;
+
+    window.speechSynthesis.cancel();
     window.speechSynthesis.speak(speech);
 }
 
