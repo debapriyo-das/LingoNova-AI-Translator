@@ -1,9 +1,13 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from deep_translator import GoogleTranslator
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=".")
 CORS(app)
+
+@app.route("/")
+def home():
+    return send_from_directory(".", "index.html")
 
 @app.route("/translate", methods=["POST"])
 def translate():
